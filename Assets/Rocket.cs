@@ -8,7 +8,7 @@ public class Rocket : MonoBehaviour
     Rigidbody rigidbody;
     AudioSource audioSource;
     [SerializeField] float rcsThrust = 200f;
-    [SerializeField] float thrustPower = 25f;
+    [SerializeField] float thrustPower = 20f;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +58,21 @@ public class Rocket : MonoBehaviour
         else
         {
             audioSource.Stop();
+        }
+    }
+
+    void OnCollisionEnter(Collision collision){
+        switch (collision.gameObject.tag)
+        {
+            case "Friendly":
+            
+            break;
+            case "Finish":
+            print("WIN!!");
+            break;
+            default:
+            print("ded");
+            break;
         }
     }
 }
