@@ -26,7 +26,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3815be1e6ba2eea4bbdbdad4d12297a7, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.09
   m_Pitch: 0.68
@@ -126,6 +126,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rcsThrust: 200
   thrustPower: 25
+  mainEngine: {fileID: 8300000, guid: a6c98f91ed10bb340922667dd65c9713, type: 3}
+  deadSound: {fileID: 8300000, guid: 1cdaf410e18742d4284422a6bd6f2a6e, type: 3}
+  winSound: {fileID: 8300000, guid: 2cdf8063f11ea5e4199da6405aa9ad8f, type: 3}
 --- !u!1001 &4390233442245060838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,15 +141,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocket Ship Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 703937502993481641, guid: 09056cd15c180204cb1db9b25e6845bc,
+        type: 3}
+      propertyPath: m_TagString
+      value: Friendly
+      objectReference: {fileID: 0}
     - target: {fileID: 7631610576802139885, guid: 09056cd15c180204cb1db9b25e6845bc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -44.79
       objectReference: {fileID: 0}
     - target: {fileID: 7631610576802139885, guid: 09056cd15c180204cb1db9b25e6845bc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.29
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 7631610576802139885, guid: 09056cd15c180204cb1db9b25e6845bc,
         type: 3}
@@ -218,16 +226,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d5808b9e6cd13584a82012c205573549, type: 2}
-    - target: {fileID: 1997505117962445998, guid: 09056cd15c180204cb1db9b25e6845bc,
+    - target: {fileID: 4118302924139140342, guid: 09056cd15c180204cb1db9b25e6845bc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.798
+      value: 1.498
       objectReference: {fileID: 0}
-    - target: {fileID: 8996939163142709217, guid: 09056cd15c180204cb1db9b25e6845bc,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: b91b963e530bf374390dc0c21bdb755f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09056cd15c180204cb1db9b25e6845bc, type: 3}
 --- !u!1 &3830836378750342991 stripped
