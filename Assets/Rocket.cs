@@ -6,19 +6,23 @@ using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
 {
-    Rigidbody rigidbody;
+    Rigidbody body;
     AudioSource audioSource;
     [SerializeField] float rcsThrust = 200f;
     [SerializeField] float thrustPower = 20f;
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip deadSound;
     [SerializeField] AudioClip winSound;
+    [SerializeField] ParticleSystem mainEngineParticles;
+    [SerializeField] ParticleSystem succesParticles;
+    [SerializeField] ParticleSystem DeadParticles;
+    [SerializeField] float levelLoadDelay = 2f;
     enum State { Alive, Dying, Trasending }
     State state = State.Alive;
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        body = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
     }
     // Update is called once per frame
@@ -37,7 +41,7 @@ public class Rocket : MonoBehaviour
     private void RespondToControl()
     {
 
-        rigidbody.freezeRotation = true;
+        body.freezeRotation = true;
         float rotationThisFrame = rcsThrust * Time.deltaTime;
         if (Input.GetKey(KeyCode.A))
         {
@@ -47,7 +51,7 @@ public class Rocket : MonoBehaviour
         {
             transform.Rotate(-Vector3.forward * rotationThisFrame);
         }
-        rigidbody.freezeRotation = false;
+        body.freezeRotation = false;
     }
     private void RespondToThrust()
     {
@@ -60,16 +64,20 @@ public class Rocket : MonoBehaviour
         {
             if (state != State.Trasending)
                 audioSource.Stop();
+                mainEngineParticles.Stop();
+            
         }
     }
 
     private void ApplyThrust()
     {
-        rigidbody.AddRelativeForce(Vector3.up * thrustPower);
+        body.AddRelativeForce(Vector3.up * thrustPower*Time.deltaTime);
         if (!audioSource.isPlaying)
         {
             audioSource.PlayOneShot(mainEngine);
+            mainEngineParticles.Play();
         }
+        
     }
 
     void OnCollisionEnter(Collision collision)
@@ -92,16 +100,18 @@ public class Rocket : MonoBehaviour
     {
         audioSource.Stop();
         audioSource.PlayOneShot(deadSound);
+        DeadParticles.Play();
         state = State.Dying;
-        Invoke("LoadFirstScene", 1f);
+        Invoke("LoadFirstScene", levelLoadDelay);
     }
 
     private void FinishSequence()
     {
 
         audioSource.PlayOneShot(winSound, 1);
+        succesParticles.Play();
         state = State.Trasending;
-        Invoke("LoadNextScene", 1f);//TODO sterializw
+        Invoke("LoadNextScene", levelLoadDelay);
     }
 
     private void LoadNextScene()
